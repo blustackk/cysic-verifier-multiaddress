@@ -1,7 +1,7 @@
 # Cysic-Verifier-MultiAddress
 
 # 1. Update System & Install Docker + Docker Compose
-``bash
+```bash
 Update system
 sudo apt update && sudo apt upgrade -y
 
