@@ -40,9 +40,7 @@ Change your `0xYourAdress` with your wallet address
 
 # 4. Create `Dockerfile`
 ```bash
-nano Dockerfile
-```
-```bash
+cat <<'EOF' > Dockerfile
 FROM ubuntu:22.04
 
 RUN apt-get update && \
