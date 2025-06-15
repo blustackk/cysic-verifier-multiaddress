@@ -22,3 +22,15 @@ sudo chmod +x /usr/local/bin/docker-compose
 mkdir -p ~/cysic/wallet1 ~/cysic/wallet2 ~/cysic/wallet3
 mkdir -p ~/.cysic/wallet1 ~/.cysic/wallet2 ~/.cysic/wallet3
 ```
+you can add as much as you want
+
+# 3. Create env
+```bash
+cat <<EOF > ~/cysic/.env
+WALLET1=0xYourWalletAddress1
+WALLET2=0xYourWalletAddress2
+WALLET3=0xYourWalletAddress3
+EOF
+```
+Change your `0xyourwalletaddress` with your wallet address
+
