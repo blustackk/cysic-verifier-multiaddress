@@ -2,19 +2,34 @@
 
 # 1. Update System & Install Docker + Docker Compose
 ```bash
-# Update system
+# 1. Update system
 sudo apt update && sudo apt upgrade -y
 
-# Install Docker
+# 2. Install Docker
 curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 
-# Add user ke grup docker
+# 3. Add user ke grup docker
 sudo usermod -aG docker $USER
+newgrp docker
+docker run hello-world
 
-# Install Docker Compose
-sudo curl -L "https://github.com/docker/compose/releases/download/v2.24.7/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
+# 4. instalasi Docker Compose 
+sudo apt install -y ca-certificates curl gnupg lsb-release
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \
+  sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] \
+  https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+# 5. Update
+sudo apt update
+
+# 6. Install Docker Compose plugin (v2 syntax: `docker compose`)
+sudo apt install -y docker-compose-plugin
+
 ```
 
 # 2. Create directory
@@ -50,30 +65,26 @@ RUN apt-get update && \
 
 WORKDIR /root
 
-ARG REWARD_ADDRESS
-ARG KEY_FILE
-ENV REWARD_ADDRESS=${REWARD_ADDRESS}
-ENV KEY_FILE=${KEY_FILE}
+ENV REWARD_ADDRESS=""
+ENV KEY_FILE=""
 
-CMD bash /root/setup_linux.sh ${REWARD_ADDRESS} && \
-    cd /root/cysic-verifier && bash start.sh
+CMD ["bash", "-c", "bash /root/setup_linux.sh $REWARD_ADDRESS && cd /root/cysic-verifier && bash start.sh"]
+EOF
 ```
 
 # 5. Create `docker-compose.yml`
 ```bash
 cat <<'EOF' > docker-compose.yml
-version: '3.8'
-
 services:
   verifier1:
     build:
       context: .
-      args:
-        REWARD_ADDRESS: ${REWARD_ADDRESS1}
-        KEY_FILE: ${KEY_FILE1}
     container_name: cysic-verifier1
     volumes:
       - /root/.cysic:/root/.cysic
+    environment:
+      - REWARD_ADDRESS=${REWARD_ADDRESS1}
+      - KEY_FILE=${KEY_FILE1}
     restart: unless-stopped
     env_file:
       - .env
@@ -81,12 +92,12 @@ services:
   verifier2:
     build:
       context: .
-      args:
-        REWARD_ADDRESS: ${REWARD_ADDRESS2}
-        KEY_FILE: ${KEY_FILE2}
     container_name: cysic-verifier2
     volumes:
       - /root/.cysic:/root/.cysic
+    environment:
+      - REWARD_ADDRESS=${REWARD_ADDRESS2}
+      - KEY_FILE=${KEY_FILE2}
     restart: unless-stopped
     env_file:
       - .env
@@ -94,27 +105,27 @@ services:
   verifier3:
     build:
       context: .
-      args:
-        REWARD_ADDRESS: ${REWARD_ADDRESS3}
-        KEY_FILE: ${KEY_FILE3}
     container_name: cysic-verifier3
     volumes:
       - /root/.cysic:/root/.cysic
+    environment:
+      - REWARD_ADDRESS=${REWARD_ADDRESS3}
+      - KEY_FILE=${KEY_FILE3}
     restart: unless-stopped
     env_file:
       - .env
 EOF
 ```
 
-# 6. Run docker
+# 6. Build and Run
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 # 7. If you want stop and delete it
 ```bash
 cd cysic
-docker-compose down
+docker compose down
 cd ~
 rm -rf cysic
 rm -rf .cysic
