@@ -61,9 +61,7 @@ CMD bash /root/setup_linux.sh ${REWARD_ADDRESS} && \
 
 # 5. Create `docker-compose.yml`
 ```bash
-nano docker-compose.yml
-```
-```bash
+cat <<'EOF' > docker-compose.yml
 version: '3.8'
 
 services:
