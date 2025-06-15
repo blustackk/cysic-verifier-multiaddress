@@ -21,8 +21,8 @@ sudo chmod +x /usr/local/bin/docker-compose
 ```bash
 mkdir -p ~/cysic
 mkdir -p ~/.cysic
+cd ~/cysic
 ```
-you can add as much as you want
 
 # 3. Create `env`
 ```bash
@@ -113,3 +113,4 @@ services:
 ```bash
 docker-compose up -d
 ```
+
