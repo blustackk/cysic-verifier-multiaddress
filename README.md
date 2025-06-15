@@ -29,14 +29,14 @@ cd ~/cysic
 nano .env
 ```
 ```bash
-REWARD_ADDRESS1=0xYourAddress1
-REWARD_ADDRESS2=0xYourAddress2
-REWARD_ADDRESS3=0xYourAddress3
+REWARD_ADDRESS1=0xYourAddress
+REWARD_ADDRESS2=0xYourAddress
+REWARD_ADDRESS3=0xYourAddress
 KEY_FILE1=/root/.cysic/wallet1.key
 KEY_FILE2=/root/.cysic/wallet2.key
 KEY_FILE3=/root/.cysic/wallet3.key
 ```
-Change your `0xyourwalletaddress` with your wallet address
+Change your `0xYourAdress` with your wallet address
 
 # 4. Create `Dockerfile`
 ```bash
