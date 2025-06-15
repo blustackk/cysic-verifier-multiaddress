@@ -51,7 +51,7 @@ KEY_FILE1=/root/.cysic/wallet1.key
 KEY_FILE2=/root/.cysic/wallet2.key
 KEY_FILE3=/root/.cysic/wallet3.key
 ```
-Change your `0xYourAdress` with your wallet address
+Change your `0xYourAdress` with your wallet address and if you can add more your wallet if you need it
 
 # 4. Create `Dockerfile`
 ```bash
@@ -74,7 +74,9 @@ EOF
 
 # 5. Create `docker-compose.yml`
 ```bash
-cat <<'EOF' > docker-compose.yml
+nano docker-compose.yml
+```
+```bash
 services:
   verifier1:
     build:
@@ -114,9 +116,8 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-EOF
 ```
-
+You can add more service if you want
 # 6. Build and Run
 ```bash
 docker compose up -d
