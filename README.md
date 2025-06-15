@@ -1,7 +1,8 @@
 # Cysic-Verifier-MultiAddress
-* Update System & Install Docker + Docker Compose
-# Update system
-```bash
+
+# 1. Update System & Install Docker + Docker Compose
+``bash
+Update system
 sudo apt update && sudo apt upgrade -y
 
 # Install Docker
