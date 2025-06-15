@@ -103,6 +103,7 @@ services:
     restart: unless-stopped
     env_file:
       - .env
+EOF
 ```
 
 # 6. Run docker
