@@ -114,3 +114,11 @@ services:
 docker-compose up -d
 ```
 
+# 7. If you want stop and delete it
+```bash
+cd cysic
+docker-compose down
+cd ~
+rm -rf cysic
+rm -rf .cysic
+```
