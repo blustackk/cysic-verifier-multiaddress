@@ -68,7 +68,7 @@ WORKDIR /root
 ENV REWARD_ADDRESS=""
 ENV KEY_FILE=""
 
-CMD ["bash", "-c", "bash /root/setup_linux.sh $REWARD_ADDRESS && cd /root/cysic-verifier && bash start.sh"]
+CMD bash -c "bash /root/setup_linux.sh \$REWARD_ADDRESS && cd /root/cysic-verifier && exec bash start.sh"
 EOF
 ```
 
